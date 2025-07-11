@@ -6,22 +6,7 @@ const connectDB = require("./config/db");
 const app = express();
 connectDB();
 
-const allowedOrigins = [
-    'http://localhost:5173',                    //Local dev
-    'https://dev-task-manager-sigma.vercel.app' //Production
-];
-
-app.use(
-    cors({
-        origin: (origin, cb) => {
-            // Allow Postman/curl which send no origin
-            if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
-            cb(new Error('Not allowed by CORS'))
-        },
-        credentials: true,
-        methods: 'GET, POST, PUT, DELETE',
-        allowedHeaders: 'Content-Type, Authorization',
-    }));
+app.use(cors());
 app.use(express.json());
 
 
